@@ -4,7 +4,7 @@
   "license": "MIT",
   "tags": ["haxe","js"],
   "classPath": "src",
-  "description": "Initial release",
+  "description": "Vector2d / Point class for Haxe. With operator overloading.",
   "version": "0.0.1",
   "releasenote": "Initial release",
   "contributors": ["markknol"],
