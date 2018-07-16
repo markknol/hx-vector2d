@@ -80,7 +80,7 @@ package geom;
 	
 	/** @return true if given vector is in range `(this-vector).length < range*range` **/
 	public function inRange(vector:Vector2d, range:Float):Bool {
-		return (Math.pow(this.x - vector.x, 2) - Math.pow(this.y - vector.y, 2)) < range * range;
+		return (Math.pow(this.x - vector.x, 2) + Math.pow(this.y - vector.y, 2)) < range * range;
 	}
 	
 	/** @return scalar number of dot product `x * vector.x + y * vector.y`. **/
