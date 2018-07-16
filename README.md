@@ -2,7 +2,7 @@
 
 Worlds most complete Vector2d / Point class for Haxe. With operator overloading.
 
-```
+```haxe
 var p1:Vector2d = new Vector2d(10, 20);
 var p2:Vector2d = {x: 10.0, y: 30.0};
 
