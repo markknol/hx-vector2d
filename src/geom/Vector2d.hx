@@ -64,11 +64,11 @@ package geom;
 		return this;
 	}
 
-    /** @return Length of this vector  `x*x + y*y`. **/
-    public var length(get, set):Float;
-    private inline function get_length():Float {
-        return this.x * this.x + this.y * this.y;
-    }
+	/** @return Length of this vector  `x*x + y*y`. **/
+	public var length(get, set):Float;
+	private inline function get_length():Float {
+		return this.x * this.x + this.y * this.y;
+	}
 	private inline function set_length(value:Float):Float {
 		var length = get_length();
 		if (length == 0) return 0;
@@ -83,24 +83,24 @@ package geom;
 		return (self - vector).length < range * range;
 	}
 	
-    /** @return scalar number of dot product `x * vector.x + y * vector.y`. **/
+	/** @return scalar number of dot product `x * vector.x + y * vector.y`. **/
 	public inline function dot(vector:Vector2d):Float {
 		var component:Vector2d = self * vector;
 		return component.x + component.y;
 	}
 
-    /** @return scalar number of vector product `x * vector.y - y * vector.x`. **/
+	/** @return scalar number of vector product `x * vector.y - y * vector.x`. **/
 	public inline function vector(vector:Vector2d):Float {
 		return this.x * vector.y - this.y * vector.x;
 	}
 
-    /** @return new vector unit of this vector `this/magnitude`. **/
-    public inline function normalize():Vector2d {
+	/** @return new vector unit of this vector `this/magnitude`. **/
+	public inline function normalize():Vector2d {
 		return self / magnitude;
 	}
 
-    /** Obtains the projection of current vector on a given axis. **/
-    public inline function projection(to:Vector2d):Float {
+	/** Obtains the projection of current vector on a given axis. **/
+	public inline function projection(to:Vector2d):Float {
 		return dot(to.normalize());
 	}
 
@@ -109,8 +109,8 @@ package geom;
 		return Math.atan2(this.y, this.x);
 	}
 
-    /** Obtains the smaller angle (radians) sandwiched from current to given vector. **/
-    public inline function angleTo(to:Vector2d):Float {
+	/** Obtains the smaller angle (radians) sandwiched from current to given vector. **/
+	public inline function angleTo(to:Vector2d):Float {
 		// get normalized vectors
 		var norm1:Vector2d = normalize();
 		var norm2:Vector2d = to.normalize();
@@ -150,17 +150,17 @@ package geom;
 		return this;
 	}
 
-    /** Obtains the projection of `this` vector on a given axis. **/
+	/** Obtains the projection of `this` vector on a given axis. **/
 	public inline function polar(magnitude:Float, angle:Float) {
 		this.x = magnitude * Math.cos(angle);
 		this.y = magnitude * Math.sin(angle);
 	}
 
-    /** @return Magnitude of vector (squared length). **/
-    public var magnitude(get, set):Float;
-    private inline function get_magnitude():Float {
-        return Math.sqrt(length);
-    }
+	/** @return Magnitude of vector (squared length). **/
+	public var magnitude(get, set):Float;
+	private inline function get_magnitude():Float {
+		return Math.sqrt(length);
+	}
 	private inline function set_magnitude(magnitude:Float):Float {
 		polar(magnitude, angle());
 		return magnitude;
@@ -170,7 +170,7 @@ package geom;
 	public inline function invertX():Void this.x *= -1;
 	/** Invert y component of `this` vector `y *= -1`. **/
 	public inline function invertY():Void this.y *= -1;
-    
+	
 	/** Invert both component values of `this` vector `this *= -1`. **/
 	public inline function invertAssign():Vector2d {
 		this.x *= -1;
@@ -186,31 +186,31 @@ package geom;
 	/** Sum given vector to `this` component values. Modifies this instance. Can also be used with `a+=b` operator. **/
 	@:op(A += B) public inline function addAssign(by:Vector2d):Vector2d {
 		this.x += by.x;
-        this.y += by.y;
+		this.y += by.y;
 		return this;
 	}
 	 /** Substract given vector from `this` component values. Modifies this instance. Can also be used with `a-=b` operator. **/
 	@:op(A -= B) public inline function substractAssign(by:Vector2d):Vector2d {
 		this.x -= by.x;
-        this.y -= by.y;
+		this.y -= by.y;
 		return this;
 	} 
 	/** Multiply `this` component values by given vector. Modifies this instance. Can also be used with `a*=b` operator. **/
 	@:op(A *= B) public inline function multiplyAssign(by:Vector2d):Vector2d {
 		this.x *= by.x;
-        this.y *= by.y;
+		this.y *= by.y;
 		return this;
 	} 
 	/** Devide `this` component values by given vector. Modifies this instance. Can also be used with `a/=b` operator. **/
 	@:op(A /= B) public inline function devideAssign(by:Vector2d):Vector2d {
 		this.x /= by.x;
-        this.y /= by.y;
+		this.y /= by.y;
 		return this;
 	} 
 	/** Sets the remainder on `this` component values from given vector. Modifies this instance. Can also be used with `a/=b` operator. **/
 	@:op(A %= B) public inline function moduloAssign(by:Vector2d):Vector2d {
 		this.x %= by.x;
-        this.y %= by.y;
+		this.y %= by.y;
 		return this;
 	} 
 	/** Clone `this` and sum given vector. Returns new vector instance. Can also be used with `a+b` operator. **/
@@ -237,35 +237,35 @@ package geom;
 	/** Sum given value to both of `this` component values. Modifies this instance. Can also be used with `a+=b` operator. **/
 	@:op(A += B) public inline function addFloatAssign(v:Float):Vector2d {
 		this.x += v;
-        this.y += v;
+		this.y += v;
 		return this;
 	} 
 	/** Substract given value to both of `this` component values. Modifies this instance. Can also be used with `a-=b` operator. **/
 	@:op(A -= B) public inline function substractFloatAssign(v:Float):Vector2d {
 		this.x -= v;
-        this.y -= v;
+		this.y -= v;
 		return this;
 	} 
 	/** Multiply `this` component values with given value. Modifies this instance. Can also be used with `a*=b` operator. **/
 	@:op(A *= B) public inline function multiplyFloatAssign(v:Float):Vector2d {
 		this.x *= v;
-        this.y *= v;
+		this.y *= v;
 		return this;
 	}
 	/** Devide `this` component values with given value. Modifies this instance. Can also be used with `a/=b` operator. **/
 	@:op(A /= B) public inline function devideFloatAssign(v:Float):Vector2d {
 		this.x /= v;
-        this.y /= v;
+		this.y /= v;
 		return this;
 	}
 	/** Sets remainder of `this` component values from given value. Modifies this instance. Can also be used with `a%=b` operator. **/
 	@:op(A %= B) public inline function moduloFloatAssign(v:Float):Vector2d {
 		this.x %= v;
-        this.y %= v;
+		this.y %= v;
 		return this;
 	} 
 	/** Clone `this` and sum given value. Returns new vector instance. Can also be used with `a+b` operator. **/
-    @:op(A + B) public inline function addFloat(value:Float):Vector2d {
+	@:op(A + B) public inline function addFloat(value:Float):Vector2d {
 		return { var v = clone(); v += value; v; }
 	} 
 	/** Clone `this` and substract given value. Returns new vector instance. Can also be used with `a-b` operator. **/
