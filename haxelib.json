@@ -1,0 +1,14 @@
+{
+  "name": "hx-vector2d",
+  "url" : "https://github.com/markknol/hx-vector2d/",
+  "license": "MIT",
+  "tags": ["haxe","js"],
+  "classPath": "src",
+  "description": "Initial release",
+  "version": "0.0.1",
+  "releasenote": "Initial release",
+  "contributors": ["markknol"],
+  "dependencies": {
+
+  }
+}

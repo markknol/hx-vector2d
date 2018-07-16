@@ -1,0 +1,8 @@
+-main Test
+-cp src/
+-cp test/
+-js bin/hx-vector2d.js
+-lib hxnodejs
+
+--next
+-cmd node bin/hx-vector2d.js
