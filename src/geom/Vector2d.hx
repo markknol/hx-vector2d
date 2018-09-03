@@ -30,10 +30,10 @@ package geom;
 		return new Vector2d(this.x, this.y);
 	}
 	
-	/** Copy component values from `this` vector to `target` vector. **/
-	public inline function copy(target:Vector2d):Void {
-		target.x = this.x;
-		target.y = this.y;
+	/** Copy component values from `target` vector to `this` vector. **/
+	public inline function copy(target:Vector2):Void {
+		this.x = target.x;
+		this.y = target.y;
 	}
 
 	/** Round component values of `this` vector. **/
