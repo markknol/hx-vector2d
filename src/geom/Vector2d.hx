@@ -31,7 +31,7 @@ package geom;
 	}
 	
 	/** Copy component values from `target` vector to `this` vector. **/
-	public inline function copy(target:Vector2):Void {
+	public inline function copy(target:Vector2d):Void {
 		this.x = target.x;
 		this.y = target.y;
 	}
