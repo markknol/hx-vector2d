@@ -9,7 +9,7 @@ package geom;
 **/
 @:forward abstract Vector2d(Vector2dImpl) from Vector2dImpl to Vector2dImpl {
 	/** Construct a new vector instance. **/
-	public function new(x:Float = 0.0, y:Float = 0.0) {
+	public inline function new(x:Float = 0.0, y:Float = 0.0) {
 		this = {x: x, y: y};
 	}
 	
