@@ -12,7 +12,7 @@ package geom;
 	public inline function new(x:Float = 0.0, y:Float = 0.0) {
 		this = {x: x, y: y};
 	}
-	
+
 	private var self(get, never):Vector2d;
 	private inline function get_self():Vector2d {
 		return (this:Vector2d);
@@ -29,7 +29,7 @@ package geom;
 	public inline function clone():Vector2d {
 		return new Vector2d(this.x, this.y);
 	}
-	
+
 	/** Copy component values from `target` vector to `this` vector. **/
 	public inline function copy(target:Vector2d):Void {
 		this.x = target.x;
@@ -77,12 +77,12 @@ package geom;
 		this.y *= l;
 		return value;
 	}
-	
+
 	/** @return true if given vector is in range `(this-vector).length < range*range` **/
 	public function inRange(vector:Vector2d, range:Float):Bool {
 		return (Math.pow(this.x - vector.x, 2) + Math.pow(this.y - vector.y, 2)) < range * range;
 	}
-	
+
 	/** @return scalar number of dot product `x * vector.x + y * vector.y`. **/
 	public inline function dot(vector:Vector2d):Float {
 		var component:Vector2d = self * vector;
@@ -125,24 +125,24 @@ package geom;
 
 		return angle;
 	}
-	
+
 	/** @return New vector instance that is made from the smallest components of two vectors. **/
 	public static function minOf(a:Vector2d, b:Vector2d):Vector2d {
 		return a.clone().min(b);
 	}
-	
+
 	/** @return New vector instance that is made from the largest components of two vectors. **/
 	public static function maxOf(a:Vector2d, b:Vector2d):Vector2d {
 		return a.clone().max(b);
 	}
-	
+
 	/** @return Sets this vector instance components to the smallest components of given vectors. **/
 	public function min(v:Vector2d):Vector2d {
 		this.x = Math.min(this.x, v.x);
 		this.y = Math.min(this.y, v.y);
 		return this;
 	}
-	
+
 	/** @return Sets this vector instance components to the largest components of given vectors. **/
 	public function max(v:Vector2d):Vector2d {
 		this.x = Math.max(this.x, v.x);
@@ -170,14 +170,14 @@ package geom;
 	public inline function invertX():Void this.x *= -1;
 	/** Invert y component of `this` vector `y *= -1`. **/
 	public inline function invertY():Void this.y *= -1;
-	
+
 	/** Invert both component values of `this` vector `this *= -1`. **/
 	public inline function invertAssign():Vector2d {
 		this.x *= -1;
 		this.y *= -1;
 		return this;
 	}
-	
+
 	/** (new instance) Invert both component values of `this` vector. **/
 	@:op(-A) public inline function invert():Vector2d {
 		return clone().invertAssign();
@@ -299,38 +299,42 @@ package geom;
 	@:to public inline function toArray():Array<Float> {
 		return [this.x, this.y];
 	}
-	
+
 	/** @return `true` if `this` is `null`. **/
 	@:op(!a) public inline function isNil() return this == null;
-	
+
 	/** @return typed Vector2d `null` value **/
 	static public inline function nil<A, B>():Vector2d return null;
-	
+
 	#if pixijs
 	/** Cast PIXI Point to Vector2d. They unify because both have same component values. **/
 	@:from public static inline function fromPixiPoint(point:pixi.core.math.Point):Vector2d return cast point;
 	/** Cast this Vector2d to PIXI Point. They unify because both have same component values. **/
 	@:to public inline function toPixiPoint():pixi.core.math.Point return cast this;
 	#end
-	
+
 	#if openfl
 	/** Cast OpenFL Point to Vector2d. They unify because both have same component values. **/
 	@:from public static inline function fromOpenFLPoint(point:openfl.geom.Point):Vector2d return cast point;
 	/** Cast this Vector2d to OpenFL Point. They unify because both have same component values. **/
 	@:to public inline function toOpenFLPoint():openfl.geom.Point return cast this;
 	#end
-	
+
 	#if heaps
 	/** Cast Heaps Point to Vector2d. They unify because both have same component values. **/
 	@:from public static inline function fromHeapsPoint(point:h2d.col.Point):Vector2d return cast point;
 	/** Cast this Vector2d to Heaps Point class. They unify because both have same component values. **/
 	@:to public inline function toHeapsPoint():h2d.col.Point return cast this;
 	#end
-	
+
 	#if kha
 	/** Cast Kha Vector2 to Vector2d. They unify because both have same component values. **/
 	@:from public static inline function fromKhaVector2(point:kha.math.Vector2):Vector2d return cast point;
 	/** Cast this Vector2d to Kha Vector2. They unify because both have same component values. **/
 	@:to public inline function toKhaVector2():kha.math.Vector2 return cast this;
 	#end
+
+	public inline function toString(prefix:String = null):String {
+		return (if (prefix != null) '${prefix}=' else '') + '{x:${this.x}, y:${this.y}}';
+	}
 }
