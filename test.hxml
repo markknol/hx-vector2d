@@ -3,6 +3,7 @@
 -cp test/
 -js bin/hx-vector2d.js
 -lib hxnodejs
+-lib hx3compat
 
 --next
 -cmd node bin/hx-vector2d.js
