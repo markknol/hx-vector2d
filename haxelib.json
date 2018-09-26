@@ -5,8 +5,8 @@
   "tags": ["haxe","js"],
   "classPath": "src",
   "description": "Vector2d / Point class for Haxe. With operator overloading.",
-  "version": "0.0.1",
-  "releasenote": "Initial release",
+  "version": "0.0.2",
+  "releasenote": "Improvements / fixes",
   "contributors": ["markknol"],
   "dependencies": {
 
