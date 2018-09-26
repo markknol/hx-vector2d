@@ -31,9 +31,10 @@ package geom;
 	}
 
 	/** Copy component values from `target` vector to `this` vector. **/
-	public inline function copy(target:Vector2d):Void {
+	public inline function copy(target:Vector2d):Vector2d {
 		this.x = target.x;
 		this.y = target.y;
+		return this;
 	}
 
 	/** Round component values of `this` vector. **/
@@ -80,7 +81,17 @@ package geom;
 
 	/** @return true if given vector is in range `(this-vector).length < range*range` **/
 	public function inRange(vector:Vector2d, range:Float):Bool {
-		return (Math.pow(this.x - vector.x, 2) + Math.pow(this.y - vector.y, 2)) < range * range;
+		return (self - vector).length < range * range;
+	}
+
+	/** @return Distance to given vector. Same as `(this-vector).magnitude` **/
+	public function distanceTo(vector:Vector2d):Float {
+		return (self - vector).magnitude;
+	}
+
+	/** @return Distance of given vectors. Same as `a.distanceTo(b)` **/
+	public inline static function distanceOf(a:Vector2d, b:Vector2d):Float {
+		return a.distanceTo(b);
 	}
 
 	/** @return scalar number of dot product `x * vector.x + y * vector.y`. **/
@@ -124,6 +135,21 @@ package geom;
 		if (vector(to) < 0) angle *= -1;
 
 		return angle;
+	}
+
+	public function rotateAroundAngle(angle:Float):Vector2d {
+		var x = this.x;
+		var y = this.y;
+		this.x = x * Math.cos(angle) - y * Math.sin(angle);
+		this.y = y * Math.cos(angle) + x * Math.sin(angle);
+		return this;
+	}
+
+	/** Obtains the smaller angle (radians) sandwiched from current to given vector. **/
+	public inline function moveTo(angle:Float, distance:Float):Vector2d {
+		this.x += Math.cos(angle) * distance;
+		this.y += Math.sin(angle) * distance;
+		return this;
 	}
 
 	/** @return New vector instance that is made from the smallest components of two vectors. **/
@@ -201,8 +227,8 @@ package geom;
 		this.y *= by.y;
 		return this;
 	} 
-	/** Devide `this` component values by given vector. Modifies this instance. Can also be used with `a/=b` operator. **/
-	@:op(A /= B) public inline function devideAssign(by:Vector2d):Vector2d {
+	/** Divide `this` component values by given vector. Modifies this instance. Can also be used with `a/=b` operator. **/
+	@:op(A /= B) public inline function divideAssign(by:Vector2d):Vector2d {
 		this.x /= by.x;
 		this.y /= by.y;
 		return this;
@@ -214,24 +240,24 @@ package geom;
 		return this;
 	} 
 	/** Clone `this` and sum given vector. Returns new vector instance. Can also be used with `a+b` operator. **/
-	@:op(A + B) public inline function add(by:Vector2d):Vector2d {
-		return { var v = clone(); v += by; v; }
+	@:op(A + B) public inline function add(vector:Vector2d):Vector2d {
+		return clone().addAssign(vector);
 	} 
 	/** Clone `this` and substract the given vector. Returns new instance. Can also be used with `a-b` operator. **/
-	@:op(A - B) public inline function substract(by:Vector2d):Vector2d {
-		return { var v = clone(); v -= by; v; }
+	@:op(A - B) public inline function substract(vector:Vector2d):Vector2d {
+		return clone().substractAssign(vector);
 	} 
 	/** Clone `this` and multiply with given vector. Returns new instance. Can also be used with `a*b` operator. **/
-	@:op(A * B) public inline function multiply(by:Vector2d):Vector2d {
-		return { var v = clone(); v *= by; v; }
+	@:op(A * B) public inline function multiply(vector:Vector2d):Vector2d {
+		return clone().multiplyAssign(vector);
 	} 
 	/** Clone `this` and devide by given vector. Returns new instance. Can also be used with `a/b` operator. **/
-	@:op(A / B) public inline function devide(by:Vector2d):Vector2d {
-		return { var v = clone(); v /= by; v; }
+	@:op(A / B) public inline function devide(vector:Vector2d):Vector2d {
+		return clone().divideAssign(vector); 
 	} 
 	/** Clone `this` and sets remainder from given vector. Returns new instance. Can also be used with `a%b` operator. **/
-	@:op(A % B) public inline function modulo(by:Vector2d):Vector2d {
-		return { var v = clone(); v %= by; v; }
+	@:op(A % B) public inline function modulo(vector:Vector2d):Vector2d {
+		return clone().moduloAssign(vector); 
 	} 
 
 	/** Sum given value to both of `this` component values. Modifies this instance. Can also be used with `a+=b` operator. **/
@@ -266,23 +292,23 @@ package geom;
 	} 
 	/** Clone `this` and sum given value. Returns new vector instance. Can also be used with `a+b` operator. **/
 	@:op(A + B) public inline function addFloat(value:Float):Vector2d {
-		return { var v = clone(); v += value; v; }
+		return clone().addFloatAssign(value);
 	} 
 	/** Clone `this` and substract given value. Returns new vector instance. Can also be used with `a-b` operator. **/
 	@:op(A - B) public inline function substractFloat(value:Float):Vector2d {
-		return { var v = clone(); v += value; v; }
+		return clone().substractFloatAssign(value);
 	} 
 	/** Clone `this` and multiply given value. Returns new vector instance. Can also be used with `a*b` operator. **/
 	@:op(A * B) public inline function multiplyFloat(value:Float):Vector2d {
-		return { var v = clone(); v += value; v; }
+		return clone().multiplyFloatAssign(value);
 	} 
 	/** Clone `this` and devide given value. Returns new vector instance. Can also be used with `a/b` operator. **/
 	@:op(A / B) public inline function devideFloat(value:Float):Vector2d {
-		return { var v = clone(); v += value; v; }
+		return clone().devideFloatAssign(value);
 	}
 	/** Clone `this` set remainder from given value. Returns new vector instance. Can also be used with `a%b` operator. **/
 	@:op(A % B) public inline function moduloFloat(value:Float):Vector2d {
-		return { var v = clone(); v %= value; v; }
+		return clone().moduloFloatAssign(value);
 	} 
 
 	/** @return `true` if both component values of `this` are same of given vector. **/
@@ -299,7 +325,7 @@ package geom;
 	@:to public inline function toArray():Array<Float> {
 		return [this.x, this.y];
 	}
-
+	
 	/** @return `true` if `this` is `null`. **/
 	@:op(!a) public inline function isNil() return this == null;
 
@@ -329,9 +355,9 @@ package geom;
 
 	#if kha
 	/** Cast Kha Vector2 to Vector2d. They unify because both have same component values. **/
-	@:from public static inline function fromKhaVector2(point:kha.math.Vector2):Vector2d return cast point;
+	@:from public static inline function fromKhaVector(point:kha.math.Vector2):Vector2d return cast point;
 	/** Cast this Vector2d to Kha Vector2. They unify because both have same component values. **/
-	@:to public inline function toKhaVector2():kha.math.Vector2 return cast this;
+	@:to public inline function toKhaVector():kha.math.Vector2 return cast this;
 	#end
 
 	public inline function toString(prefix:String = null):String {
