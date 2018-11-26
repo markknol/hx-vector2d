@@ -1,0 +1,9 @@
+-js dummy
+-D doc-gen
+--macro include("geom")
+--no-output
+-xml doc/js.xml
+
+--next
+
+-cmd haxelib run dox -o doc/out -i doc --title "2d Vector for Haxe" --toplevel-package geom -D source-path https://github.com/markknol/hx-vector2d/blob/master/
