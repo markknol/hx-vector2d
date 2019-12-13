@@ -1,4 +1,4 @@
-# hx-vector2d
+# hx-vector2d [![Build Status](https://travis-ci.org/markknol/hx-vector2d.svg?branch=master)](https://travis-ci.org/markknol/hx-vector2d)
 
 Worlds most complete Vector2d / Point class for Haxe. With operator overloading.
 
