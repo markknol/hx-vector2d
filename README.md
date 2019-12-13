@@ -15,6 +15,9 @@ trace(p3.length); // 2900
 
 // same as Math.sqrt(p3.length)
 trace(p3.magnitude); // 53.85164807134504
+
+// From array is also possible
+var p4:Vector2d = [0.2, 0.3]; 
 ```
 
 ### Dependencies
