@@ -1,4 +1,4 @@
-package temple.geom;
+package geom;
 
 @:dox(show) private typedef Vector2dImpl = {x:Float, y:Float}
 
